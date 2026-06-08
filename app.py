@@ -27,7 +27,13 @@ distance = st.number_input("Approximate distance traveled today (in km):", min_v
 
 # Category B: Energy & Home
 st.subheader("⚡ Home Energy")
-electricity = st.number_input("Estimated daily household electricity consumption (in kWh):", min_value=0.0, step=1.0)
+energy_mode = st.radio("How would you like to enter your energy usage?", ["Daily Estimate (kWh)", "Monthly Utility Bill (kWh)"])
+
+if energy_mode == "Daily Estimate (kWh)":
+    electricity = st.number_input("Estimated daily household electricity consumption (in kWh):", min_value=0.0, value=10.0, step=1.0)
+else:
+    monthly_electricity = st.number_input("Your typical monthly electricity bill consumption (in kWh):", min_value=0.0, value=300.0, step=10.0)
+    electricity = monthly_electricity / 30.0  # Convert monthly data into the daily logic average
 
 # Category C: Diet
 st.subheader("🍽️ Dietary Choice")
